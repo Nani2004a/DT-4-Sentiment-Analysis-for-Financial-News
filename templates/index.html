@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            background: linear-gradient(-45deg, #4848ff, #ffffff, #000000, #ff001e);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
             overflow: hidden;
@@ -24,11 +24,11 @@
         }
         .container {
             text-align: center;
-            background: white;
+            background: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out, pulse 3s infinite;
             position: relative;
             z-index: 2;
         }
@@ -42,8 +42,15 @@
                 transform: translateY(0);
             }
         }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
         button {
-            background-color: #007bff;
+            background: linear-gradient(-45deg, #4848ff, #ffffff, #000000, #ff001e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite, pulseBtn 1.5s infinite, bounce 2s infinite;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -51,14 +58,22 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: transform 0.3s ease;
         }
         button:hover {
-            background-color: #0056b3;
             transform: scale(1.1);
         }
         button:active {
             transform: scale(0.95);
+        }
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         .animated-figures {
             position: absolute;
@@ -67,21 +82,38 @@
             overflow: hidden;
             z-index: 1;
         }
-        .circle {
+        .circle, .square {
             position: absolute;
+            opacity: 0.7;
+        }
+        .circle {
             width: 50px;
             height: 50px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            opacity: 0.8;
-            animation: float 10s infinite ease-in-out;
+            animation: float 8s infinite ease-in-out;
+        }
+        .square {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: rotate 6s infinite linear;
         }
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(20px); }
             100% { transform: translateY(0px); }
         }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
+    <script>
+        function redirectToPredict() {
+            window.location.href = '/predict';
+        }
+    </script>
 </head>
 <body>
     <div class="animated-figures">
@@ -89,10 +121,14 @@
         <div class="circle" style="top: 40%; left: 60%; animation-duration: 12s;"></div>
         <div class="circle" style="top: 70%; left: 30%; animation-duration: 10s;"></div>
         <div class="circle" style="top: 20%; left: 80%; animation-duration: 9s;"></div>
+        <div class="circle" style="top: 50%; left: 20%; animation-duration: 7s;"></div>
+        <div class="square" style="top: 15%; left: 70%; animation-duration: 10s;"></div>
+        <div class="square" style="top: 60%; left: 40%; animation-duration: 8s;"></div>
+        <div class="square" style="top: 80%; left: 90%; animation-duration: 12s;"></div>
     </div>
     <div class="container">
         <h1>Sentiment Analysis for Financial News</h1>
-        <button>Predict</button>
+        <button onclick="redirectToPredict()">Predict</button>
     </div>
 </body>
 </html>
