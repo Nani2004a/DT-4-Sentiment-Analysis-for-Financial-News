@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(-45deg, #4848ff, #ffffff, #000000, #ff001e);
+            background: linear-gradient(-45deg, #000000, #ffffff, #000000, #ff001e);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
             overflow: hidden;
@@ -24,33 +24,23 @@
         }
         .container {
             text-align: center;
-            background: rgb(255, 255, 255);
+            background: rgb(30, 30, 30);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-in-out, pulse 3s infinite;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            color: white;
             position: relative;
             z-index: 2;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
         }
         button {
-            background: linear-gradient(-45deg, #4848ff, #ffffff, #000000, #ff001e);
+            background: linear-gradient(-45deg, #000000, #ffffff, #000000, #ff001e);
             background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite, pulseBtn 1.5s infinite, bounce 2s infinite;
+            animation: gradientBG 10s ease infinite;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -66,15 +56,6 @@
         button:active {
             transform: scale(0.95);
         }
-        @keyframes pulseBtn {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
         .animated-figures {
             position: absolute;
             width: 100%;
@@ -82,38 +63,47 @@
             overflow: hidden;
             z-index: 1;
         }
-        .circle, .square {
+        .circle, .square, .triangle {
             position: absolute;
-            opacity: 0.7;
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
         }
         .circle {
             width: 50px;
             height: 50px;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
         }
         .square {
             width: 40px;
             height: 40px;
             background: rgba(255, 255, 255, 0.5);
-            animation: rotate 6s infinite linear;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 50px solid rgba(255, 255, 255, 0.5);
         }
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(20px); }
             100% { transform: translateY(0px); }
         }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
     </style>
-    <script>
-        function redirectToPredict() {
-            window.location.href = '/predict';
-        }
-    </script>
 </head>
 <body>
-    
+    <div class="animated-figures">
+        <div class="circle" style="top: 10%; left: 15%; animation-duration: 8s;"></div>
+        <div class="square" style="top: 50%; left: 60%; animation-duration: 12s;"></div>
+        <div class="triangle" style="top: 80%; left: 30%; animation-duration: 10s;"></div>
+        <div class="circle" style="top: 25%; left: 85%; animation-duration: 9s;"></div>
+        <div class="square" style="top: 65%; left: 40%; animation-duration: 11s;"></div>
+    </div>
+    <div class="container">
+        <h1>Sentiment Analysis for Financial News</h1>
+        <button onclick="location.href='/predict'">Predict</button>
+    </div>
+</body>
+</html>
